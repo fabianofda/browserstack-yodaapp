@@ -41,20 +41,22 @@ jobs:
       
       - name: Conceder permissões de execução ao script robot
         run: |
-          chmod +x robot
+          crun: chmod +x tests/*
+          working-directory: ${{ github.workspace }}
         
       - name: Executar testes com Robot Framework e Appium na BrowserStack
         run: |
-          source env/bin/activate && chmod +x robot \
+          source env/bin/activate && robot \
             --variable BROWSERSTACK_USERNAME:${{ secrets.BROWSERSTACK_USERNAME }} \
             --variable BROWSERSTACK_ACCESS_KEY:${{ secrets.BROWSERSTACK_ACCESS_KEY }} \
             --variable DEVICE_NAME:"Samsung Galaxy S22 Ultra" \
             --variable AUTOMATION_NAME:UIAutomator2 \
             --variable APP:bs://18a57390e2aeb9ecb0c19580cb29ad69af16d250 \
-            --variable UUID:emulator-5554 \
             --variable AUTO_GRANT_PERMISSIONS:true \
             --variable PROJECT_NAME:YodaApp \
             -d ./logs tests/
+
+        working-directory: ${{ github.workspace }}
 
       - name: Logs e Relatórios
         uses: actions/upload-artifact@v3
