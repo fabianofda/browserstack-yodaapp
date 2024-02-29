@@ -1,0 +1,55 @@
+name: Testes na BrowserStack
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4.1.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5.0.0
+        with:
+         python-version: '3.9'  # Escolha a versão do Python que você está usando
+
+      - name: Criar e Ativar Ambiente Virtual
+        run: |
+          python3 -m venv env
+          source env/bin/activate
+
+      - name: Configurar Credenciais da BrowserStack e Configurações
+        env:
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+        run: |
+          echo "userName: $BROWSERSTACK_USERNAME" >> browserstack.yml
+          echo "accessKey: $BROWSERSTACK_ACCESS_KEY" >> browserstack.yml
+          python3 -m pip install browserstack-sdk
+          browserstack-sdk setup --framework "robot" --username $BROWSERSTACK_USERNAME --key $BROWSERSTACK_ACCESS_KEY
+          pip show browserstack-sdk
+
+      - name: Instalar dependências
+        run: |
+          source env/bin/activate
+          pip install -r requirements.txt
+        
+      - name: Executar testes com Robot Framework e Appium na BrowserStack
+        run: |
+          source env/bin/activate && robot \
+            --variable BROWSERSTACK_USERNAME:${BROWSERSTACK_USERNAME} \
+            --variable BROWSERSTACK_ACCESS_KEY:${BROWSERSTACK_ACCESS_KEY} \
+            -d ./logs tests/
+
+      - name: Logs e Relatórios
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: reports
+          path: ./logs
+          retention-days: 30
