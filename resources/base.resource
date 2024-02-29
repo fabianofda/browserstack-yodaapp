@@ -21,6 +21,7 @@ Resource    ./actions/login.resource
 
 Start BrowserStack Session
     Open Application
+    ...    http://localhost:4723
     ...    platformName=Android
     ...    appium:deviceName=Samsung Galaxy S22 Ultra
     ...    appium:automationName=UIAutomator2
