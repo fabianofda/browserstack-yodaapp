@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5.0.0
         with:
-         python-version: '3.9'  # Escolha a versão do Python que você está usando
+          python-version: '3.9'  # Escolha a versão do Python que você está usando
 
       - name: Criar e Ativar Ambiente Virtual
         run: |
@@ -42,8 +42,15 @@ jobs:
       - name: Executar testes com Robot Framework e Appium na BrowserStack
         run: |
           source env/bin/activate && robot \
-            --variable BROWSERSTACK_USERNAME:${BROWSERSTACK_USERNAME} \
-            --variable BROWSERSTACK_ACCESS_KEY:${BROWSERSTACK_ACCESS_KEY} \
+            --variable BROWSERSTACK_USERNAME:${{ secrets.BROWSERSTACK_USERNAME }} \
+            --variable BROWSERSTACK_ACCESS_KEY:${{ secrets.BROWSERSTACK_ACCESS_KEY }} \
+            --variable HUB_URL:http://hub-cloud.browserstack.com/wd/hub \
+            --variable DEVICE_NAME:"Samsung Galaxy S22 Ultra" \
+            --variable AUTOMATION_NAME:UIAutomator2 \
+            --variable APP:bs://18a57390e2aeb9ecb0c19580cb29ad69af16d250 \
+            --variable UUID:emulator-5554 \
+            --variable AUTO_GRANT_PERMISSIONS:true \
+            --variable PROJECT_NAME:YodaApp \
             -d ./logs tests/
 
       - name: Logs e Relatórios
