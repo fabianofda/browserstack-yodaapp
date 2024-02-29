@@ -38,10 +38,6 @@ jobs:
         run: |
           source env/bin/activate
           pip install -r requirements.txt
-      
-      - name: Conceder permissões de execução ao script robot
-        run: chmod -R +x tests/
-        working-directory: ${{ github.workspace }}
         
       - name: Executar testes com Robot Framework e Appium na BrowserStack
         run: |
@@ -54,8 +50,6 @@ jobs:
             --variable AUTO_GRANT_PERMISSIONS:true \
             --variable PROJECT_NAME:YodaApp \
             -d ./logs tests/
-
-        working-directory: ${{ github.workspace }}
 
       - name: Logs e Relatórios
         uses: actions/upload-artifact@v3
