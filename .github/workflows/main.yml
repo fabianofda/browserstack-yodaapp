@@ -1,9 +1,6 @@
 name: Testes na BrowserStack
 
 on:
-  push:
-    branches:
-      - master
   workflow_dispatch:
 
 jobs:
