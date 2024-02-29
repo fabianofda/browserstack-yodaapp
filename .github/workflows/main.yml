@@ -44,7 +44,6 @@ jobs:
           source env/bin/activate && robot \
             --variable BROWSERSTACK_USERNAME:${{ secrets.BROWSERSTACK_USERNAME }} \
             --variable BROWSERSTACK_ACCESS_KEY:${{ secrets.BROWSERSTACK_ACCESS_KEY }} \
-            --variable HUB_URL:http://hub-cloud.browserstack.com/wd/hub \
             --variable DEVICE_NAME:"Samsung Galaxy S22 Ultra" \
             --variable AUTOMATION_NAME:UIAutomator2 \
             --variable APP:bs://18a57390e2aeb9ecb0c19580cb29ad69af16d250 \
