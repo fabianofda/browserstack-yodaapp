@@ -34,8 +34,8 @@ Start BrowserStack Session
     ...    appium:platformVersion=12.0 
 
 Close BrowserStack Session
-    Capture Page Screenshot
-    Sleep    2
+    # Capture Page Screenshot
+    # Sleep    2
     Close Application
 
 
