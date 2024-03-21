@@ -1,8 +1,8 @@
 *** Settings ***
 Resource    ../resources/base.resource
 
-Test Setup        Start BrowserStack Session
-Test Teardown     Close BrowserStack Session
+Test Setup        Start Session
+Test Teardown     Close Session
 
 *** Test Cases ***
 Deve logar com sucesso

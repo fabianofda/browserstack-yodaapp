@@ -10,10 +10,9 @@ Start session
     ...    platformName=Android
     ...    automationName=UIAutomator2
     ...    app=${EXECDIR}/app/yodapp-beta.apk
+    ...    appium:uuid=emulator-5554
     ...    autoGrantPermissions=true
-    ...    projectName=YodaApp
    
-
 Close session
     Capture Page Screenshot
     Sleep    2
