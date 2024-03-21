@@ -36,16 +36,13 @@ jobs:
           cmake: 3.10.2.4988404
           script: ./gradlew connectedCheck
 
-      - name: Start emulator
-        run: $ANDROID_SDK_ROOT/emulator/emulator -avd emulator-5554 -no-audio -no-window
-
       - name: Install Appium
         run: npm install -g appium
 
       - name: Start Appium server
         run: appium &
 
-      - name: Executar testes com Robot Framework e Appium na BrowserStack
+      - name: Executar testes com Robot Framework e Appium
         run: |
           robot -d ./logs tests
 
