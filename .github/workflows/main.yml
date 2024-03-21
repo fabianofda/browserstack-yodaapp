@@ -18,17 +18,23 @@ jobs:
         with:
           python-version: "3.9"
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-
       - name: Instalar dependências
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: run tests
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install Appium
+        run: npm install -g appium
+
+      - name: Start Appium server
+        run: appium &
+
+      - name: run android-emulator-runner
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
@@ -36,11 +42,8 @@ jobs:
           cmake: 3.10.2.4988404
           script: ./gradlew connectedCheck
 
-      - name: Install Appium
-        run: npm install -g appium
-
-      - name: Start Appium server
-        run: appium &
+      - name: Change permissions of gradlew
+        run: chmod +x ./gradlew
 
       - name: Executar testes com Robot Framework e Appium
         run: |
