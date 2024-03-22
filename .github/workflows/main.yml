@@ -40,7 +40,7 @@ jobs:
       - name: Run tests with emulator.wtf
         uses: emulator-wtf/run-tests@v0
         with:
-          api-token: ${{ secrets.EW_API_TOKEN }}
+          api-token: AgAAX2TBDGeGMroh477kulG8qUHbUPJeTPiC8ehdKU8UCvhB6bI12ftyn499GEcca0rxnLsvXubXQtcw+sLqmVcC8XxWh7qxOmS/gng58UW5d/dEKT8exioSe0zAqLem+B49Rf2L36IXHW0Z/WFVCrPC7PNp43Wa+xv38DlgzyeRyFqrLX5H7jQ1dJ4QkAMisvOM
           app: path/to/your/app-debug.apk
           test: path/to/your/test.apk
           outputs-dir: build/test-results
