@@ -40,7 +40,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Install / update Android SDK components
+      - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
