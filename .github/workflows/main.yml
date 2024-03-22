@@ -35,7 +35,7 @@ jobs:
         run: appium &
 
       - name: Change permissions of gradlew
-        run: chmod +x ./gradlew
+        run: chmod +x $GITHUB_WORKSPACE/gradlew
 
       - name: run android-emulator-runner
         uses: reactivecircus/android-emulator-runner@v2
