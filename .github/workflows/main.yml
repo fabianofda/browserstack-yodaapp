@@ -35,7 +35,7 @@ jobs:
         run: appium &
 
       - name: Run UI Tests
-        uses: vgaidarji/android-github-actions-emulator@v1.0.1
+        uses: faruktoptas/android-github-actions-emulator
 
       - name: Executar testes com Robot Framework e Appium
         run: |
