@@ -34,6 +34,9 @@ jobs:
       - name: Start Appium server
         run: appium &
 
+      - name: Change permissions of gradlew
+        run: chmod +x ./gradlew
+
       - name: run android-emulator-runner
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -41,9 +44,6 @@ jobs:
           ndk: 21.0.6113669
           cmake: 3.10.2.4988404
           script: ./gradlew connectedCheck
-
-      - name: Change permissions of gradlew
-        run: chmod +x ./gradlew
 
       - name: Executar testes com Robot Framework e Appium
         run: |
