@@ -26,6 +26,9 @@ jobs:
       - name: Install Appium
         run: npm install -g appium
 
+      - name: Install Appium-Python-Client
+        run: pip install Appium-Python-Client
+
       - name: Start Appium server
         run: appium &
 
@@ -42,7 +45,6 @@ jobs:
       - name: Executar testes com Robot Framework e Appium
         run: |
           robot -d ./logs tests
-
 
       - name: Logs e Relatórios
         uses: actions/upload-artifact@v3
