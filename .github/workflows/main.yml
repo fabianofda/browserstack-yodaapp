@@ -34,8 +34,17 @@ jobs:
       - name: Start Appium server
         run: appium &
 
-      - name: Run UI Tests
-        uses: faruktoptas/android-github-actions-emulator
+      - name: Change permissions of gradlew
+        run: chmod +x $GITHUB_WORKSPACE/gradlew
+
+      - name: Run tests with emulator.wtf
+        uses: emulator-wtf/run-tests@v0
+        with:
+          api-token: ${{ secrets.EW_API_TOKEN }}
+          app: path/to/your/app-debug.apk
+          test: path/to/your/test.apk
+          outputs-dir: build/test-results
+          # Add other configuration options as needed
 
       - name: Executar testes com Robot Framework e Appium
         run: |
