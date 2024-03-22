@@ -34,17 +34,17 @@ jobs:
       - name: Start Appium server
         run: appium &
 
-      - name: Change permissions of gradlew
-        run: chmod +x $GITHUB_WORKSPACE/gradlew
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
 
-      - name: Run tests with emulator.wtf
-        uses: emulator-wtf/run-tests@v0
+      - name: Install / update Android SDK components
+        uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-token: AgAAX2TBDGeGMroh477kulG8qUHbUPJeTPiC8ehdKU8UCvhB6bI12ftyn499GEcca0rxnLsvXubXQtcw+sLqmVcC8XxWh7qxOmS/gng58UW5d/dEKT8exioSe0zAqLem+B49Rf2L36IXHW0Z/WFVCrPC7PNp43Wa+xv38DlgzyeRyFqrLX5H7jQ1dJ4QkAMisvOM
-          app: path/to/your/app-debug.apk
-          test: path/to/your/test.apk
-          outputs-dir: build/test-results
-          # Add other configuration options as needed
+          api-level: 29
+          script: ./gradlew connectedCheck
 
       - name: Executar testes com Robot Framework e Appium
         run: |
