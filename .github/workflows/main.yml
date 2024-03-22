@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  run-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -42,6 +42,7 @@ jobs:
       - name: Executar testes com Robot Framework e Appium
         run: |
           robot -d ./logs tests
+
 
       - name: Logs e Relatórios
         uses: actions/upload-artifact@v3
